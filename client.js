@@ -1,3 +1,10 @@
+function WaitFor(duration){
+    return new Promise((resolve, reject)=>{
+        let thistime = setTimeout(function(){
+            resolve(true);
+        }, duration)
+    });
+}
 function CollisionLoaded(entity){               
     return new Promise((resolve, reject)=>{
         let t = setInterval(function(){
@@ -77,8 +84,8 @@ async function TeleportToExt(tX, tY, tZ, tH){
         let pPed = GetPlayerPed(-1);
         let pVeh = IsPedInAnyVehicle(pPed);
         FreezeEntityPosition(pPed, true);
-        await this.fadeScreen(true,1000);
-        await this.fadeEntity(pPed, true);
+        await fadeScreen(true,1000);
+        await fadeEntity(pPed, true);
         if(pVeh==true){
             SetEntityCoords(GetVehiclePedIsIn(pPed, false), Number(tX), Number(tY), Number(tZ), false, false, false, true)
             SetEntityHeading(GetVehiclePedIsIn(pPed, false), Number(tH))
@@ -89,15 +96,15 @@ async function TeleportToExt(tX, tY, tZ, tH){
         }
         //check collision with world is present before fading
         RequestCollisionAtCoord(Number(tX), Number(tY), Number(tZ))
-        await this.CollisionLoaded(pPed);
-        await this.fadeScreen(false,1000);
-        await this.fadeEntity(pPed, false);
+        await CollisionLoaded(pPed);
+        //timed wait here?!
+        await fadeScreen(false,1000);
+        await fadeEntity(pPed, false);
         FreezeEntityPosition(pPed, false)
     });
 }
 RegisterCommand('ttw', async function(source, args){
     let wpCoords = [0, 0, 71.2]
-
     let wpBlip = GetFirstBlipInfoId(8);
     wpCoords = GetBlipCoords(wpBlip);
     let groundplus = wpCoords[2]+0.0001
