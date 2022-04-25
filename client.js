@@ -97,6 +97,7 @@ async function TeleportToExt(tX, tY, tZ, tH){
         //check collision with world is present before fading
         RequestCollisionAtCoord(Number(tX), Number(tY), Number(tZ))
         await CollisionLoaded(pPed);
+        
         //timed wait here?!
         await fadeScreen(false,1000);
         await fadeEntity(pPed, false);
@@ -107,6 +108,5 @@ RegisterCommand('ttw', async function(source, args){
     let wpCoords = [0, 0, 71.2]
     let wpBlip = GetFirstBlipInfoId(8);
     wpCoords = GetBlipCoords(wpBlip);
-    let groundplus = wpCoords[2]+0.0001
-    TeleportToExt(wpCoords[0], wpCoords[1], groundplus, 0.0)
+    TeleportToExt(wpCoords[0], wpCoords[1], wpCoords[2], 0.0)
 },false)
