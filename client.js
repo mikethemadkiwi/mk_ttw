@@ -86,7 +86,7 @@ async function TeleportToExt(tX, tY, tZ, tH){
         FreezeEntityPosition(pPed, true);
         await fadeScreen(true,1000);
         await fadeEntity(pPed, true);
-        gZ = Number(tZ+1.0)
+        gZ = Number(tZ+5.0)
         if(pVeh==true){
             SetEntityCoords(GetVehiclePedIsIn(pPed, false), Number(tX), Number(tY), Number(gZ), false, false, false, true)
             SetEntityHeading(GetVehiclePedIsIn(pPed, false), Number(tH))
