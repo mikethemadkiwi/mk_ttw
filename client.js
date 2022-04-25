@@ -86,19 +86,21 @@ async function TeleportToExt(tX, tY, tZ, tH){
         FreezeEntityPosition(pPed, true);
         await fadeScreen(true,1000);
         await fadeEntity(pPed, true);
+        gZ = Number(tZ+0.1)
         if(pVeh==true){
-            SetEntityCoords(GetVehiclePedIsIn(pPed, false), Number(tX), Number(tY), Number(tZ), false, false, false, true)
+            SetEntityCoords(GetVehiclePedIsIn(pPed, false), Number(tX), Number(tY), Number(gZ), false, false, false, true)
             SetEntityHeading(GetVehiclePedIsIn(pPed, false), Number(tH))
         }
         else{
-            SetEntityCoords(pPed, Number(tX), Number(tY), Number(tZ), false, false, false, true)
+            SetEntityCoords(pPed, Number(tX), Number(tY), Number(gZ), false, false, false, true)
             SetEntityHeading(pPed, Number(tH))
         }
         //check collision with world is present before fading
-        RequestCollisionAtCoord(Number(tX), Number(tY), Number(tZ))
+        RequestCollisionAtCoord(Number(tX), Number(tY), Number(gZ))
         await CollisionLoaded(pPed);
         // put them properly on ground.
-        let gZ = GetGroundZFor_3dCoord(Number(tX), Number(tY), Number(tZ), true)
+        let GROUNDz = GetGroundZFor_3dCoord(Number(tX), Number(tY), Number(gZ), true)
+        console.log(GROUNDz[0],GROUNDz[1])
         if(pVeh==true){
             SetEntityCoords(GetVehiclePedIsIn(pPed, false), Number(tX), Number(tY), Number(gZ[1]), false, false, false, true)
             SetEntityHeading(GetVehiclePedIsIn(pPed, false), Number(tH))
