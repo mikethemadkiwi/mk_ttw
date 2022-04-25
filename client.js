@@ -86,7 +86,7 @@ async function TeleportToExt(tX, tY, tZ, tH){
         FreezeEntityPosition(pPed, true);
         await fadeScreen(true,1000);
         await fadeEntity(pPed, true);
-        gZ = Number(tZ+100)
+        gZ = Number(tZ+1.0)
         if(pVeh==true){
             SetEntityCoords(GetVehiclePedIsIn(pPed, false), Number(tX), Number(tY), Number(gZ), false, false, false, true)
             SetEntityHeading(GetVehiclePedIsIn(pPed, false), Number(tH))
@@ -100,7 +100,10 @@ async function TeleportToExt(tX, tY, tZ, tH){
         await CollisionLoaded(pPed);
         // put them properly on ground.
         let GROUNDz = GetGroundZFor_3dCoord(Number(tX), Number(tY), Number(gZ), true)
-        console.log(GROUNDz[0],GROUNDz[1])
+        console.log(GROUNDz[0], GROUNDz[1])
+        if(GROUNDz[0]!=true){
+            GROUNDz[1] = gZ
+        }
         if(pVeh==true){
             SetEntityCoords(GetVehiclePedIsIn(pPed, false), Number(tX), Number(tY), Number(gZ[1]), false, false, false, true)
             SetEntityHeading(GetVehiclePedIsIn(pPed, false), Number(tH))
