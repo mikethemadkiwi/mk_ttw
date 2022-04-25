@@ -27,7 +27,7 @@ function fadeScreen(state, duration){
                 DoScreenFadeOut(duration);
             })
             let isfadescreentimer = setTick(async() => {
-                // ShowHudComponentThisFrame(17);
+                ShowHudComponentThisFrame(18);
                 if( IsScreenFadingOut()==false ){
                     clearTick(isfadescreentimer);
                     resolve(true)
@@ -39,7 +39,7 @@ function fadeScreen(state, duration){
                 DoScreenFadeIn(duration);
             })
             let isfadescreentimer = setTick(async() => {
-                // ShowHudComponentThisFrame(17);
+                ShowHudComponentThisFrame(18);
                 if( IsScreenFadingIn()==false ){
                     clearTick(isfadescreentimer);
                     resolve(true)
@@ -64,6 +64,7 @@ function fadeEntity(entity, state){
             })
         }
         let isfadetimer = setTick(async() => {
+            ShowHudComponentThisFrame(18);
             if( NetworkIsEntityFading(entity)==false ){
                 clearTick(isfadetimer);
                 resolve(true)
@@ -96,8 +97,9 @@ async function TeleportToExt(tX, tY, tZ, tH){
 }
 RegisterCommand('ttw', async function(source, args){
     let wpBlip = GetFirstBlipInfoId(8);
-    console.log(wpBlip)
+    // console.log(wpBlip)
     let wpCoords = GetBlipCoords(wpBlip);
-    console.log(wpCoords[0],wpCoords[1],wpCoords[2])
-    TeleportToExt(wpCoords[0],wpCoords[1],wpCoords[2], 0.0)
+    // console.log(wpCoords[0],wpCoords[1],wpCoords[2])
+    let groundplus = wpCoords[2]+0.0001
+    TeleportToExt(wpCoords[0], wpCoords[1], groundplus, 0.0)
 },false)
