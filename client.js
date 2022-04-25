@@ -100,11 +100,11 @@ async function TeleportToExt(tX, tY, tZ, tH){
         // put them properly on ground.
         let gZ = GetGroundZFor_3dCoord(Number(tX), Number(tY), Number(tZ), true)
         if(pVeh==true){
-            SetEntityCoords(GetVehiclePedIsIn(pPed, false), Number(tX), Number(tY), Number(gZ[2]), false, false, false, true)
+            SetEntityCoords(GetVehiclePedIsIn(pPed, false), Number(tX), Number(tY), Number(gZ[1]), false, false, false, true)
             SetEntityHeading(GetVehiclePedIsIn(pPed, false), Number(tH))
         }
         else{
-            SetEntityCoords(pPed, Number(tX), Number(tY), Number(gZ[2]), false, false, false, true)
+            SetEntityCoords(pPed, Number(tX), Number(tY), Number(gZ[1]), false, false, false, true)
             SetEntityHeading(pPed, Number(tH))
         }
         //timed wait here?!
